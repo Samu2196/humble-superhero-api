@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react'
 import logic from '../logic/index'
 
+import Button from './library/Button'
+import Container from './library/Container'
+import Form from './library/Form'
+import Input from './library/Input'
+import Heading from './library/Heading'
+
 function App() {
   const [superheros, setSuperheros] = useState([])
   const [name, setName] = useState('')
@@ -57,42 +63,31 @@ function App() {
 
   return (
     
-    <div className='min-h-screen bg-gray-100 flex flex-col items-center py-10'>
-      <h1 className='text-3xl font-bold text-gray-800 mb-6'>Humble Superhero API</h1>
-      <form onSubmit={handleCreateNewSuperheroSubmit} className='bg-white shadow-md rounded-lg p-6 w-96 space-y-4'>
-        <input 
+    <Container>
+      <Heading level='1' className='text-3xl font-bold text-gray-800 mb-6'>Humble Superhero API</Heading>
+      <Form onSubmit={handleCreateNewSuperheroSubmit}>
+        <Input 
           type='text' 
           placeholder='Name' 
           value={name} 
           onChange={(e) => setName(e.target.value)} 
-          required 
-          className='w-full p-2 border border-gray-300 rounded'
         />
-        <input 
+        <Input 
           type='text' 
           placeholder='Super Power' 
           value={superPower} 
-          onChange={(e) => setSuperPower(e.target.value)} 
-          required 
-          className='w-full p-2 border border-gray-300 rounded'
+          onChange={(e) => setSuperPower(e.target.value)}
         />
-        <input 
+        <Input 
           type='number' 
           placeholder='Humility (1-10)' 
           value={humilityScore} 
-          onChange={(e) => setHumilityScore(Number(e.target.value))} 
-          required 
-          className='w-full p-2 border border-gray-300 rounded'
+          onChange={(e) => setHumilityScore(Number(e.target.value))}
         />
-        <button 
-          type='submit' 
-          className='w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition'
-        >
-          Create a new Superhero
-        </button>
-      </form>
+        <Button>Create a new Superhero</Button>
+      </Form>
 
-      <h2 className='text-2xl font-semibold text-gray-700 mt-8'>List of Superheros</h2>
+      <Heading level='2' className='text-2xl font-semibold text-gray-700 mt-8'>List of Superheros</Heading>
       {(superheros.length === 0 
       ? <p className="text-gray-500">No Superheros Available</p> 
       : <ul className='w-96 mt-4'>
@@ -104,7 +99,7 @@ function App() {
           </li>
         ))}
       </ul>)}
-    </div>
+    </Container>
   )}
 
 export default App
