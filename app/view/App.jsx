@@ -2,65 +2,46 @@ import { useState, useEffect } from 'react'
 import logic from '../logic/index'
 
 function App() {
-  console.log("✅ El componente App se está montando");
-
-  const [superheroes, setSuperheroes] = useState([])
+  const [superheros, setSuperheros] = useState([])
   const [name, setName] = useState('')
-  const [superpower, setSuperpower] = useState('')
+  const [superPower, setSuperPower] = useState('')
   const [humilityScore, setHumilityScore] = useState()
 
   useEffect(() => {
-    console.log("🔄 useEffect ejecutado: llamando a listSuperheroes...");
-    listSuperheroes();
-  }, []); // 👈 Se ejecuta solo al montar el componente
+    listSuperheros()
+  }, []) //Only the first time
 
   useEffect(() => {
-    console.log("🟢 Estado actualizado:", superheroes);
-  }, [superheroes]);
+  }, [superheros])
   
-  
-
  //List all superheros  
- const listSuperheroes = async () => {
+ const listSuperheros = () => {
   try {
-    const data = await logic.listSuperheroes();
-    console.log("📥 Datos recibidos:", data);
+    logic.listSuperheros()
+    .then(data => setSuperheros(data))
+    .catch(error => {
+        console.error(error)
 
-    if (!Array.isArray(data)) {
-      console.error("⚠️ La respuesta no es un array:", data);
-      return;
-    }
-
-    setSuperheroes(prev => {
-      console.log("✅ Estado antes:", prev);
-      console.log("✅ Nuevo estado:", data);
-      return [...data]; // Asegura que React lo detecte como cambio
-    });
-
+        alert(error.message)
+      })
   } catch (error) {
-    console.error("❌ Error en listSuperheroes:", error);
-    alert(error.message);
+    console.error(error)
+
+    alert(error.message)
   }
-};
+}
 
   //Create new superhero
   const handleCreateNewSuperheroSubmit = event => {
     event.preventDefault()
 
-    if (humilityScore < 1 || humilityScore > 10) {
-      alert('Ingrese datos válidos (1-10 de humildad)')
-      return
-    }
-
-    //TODO
-
     try {
-      logic.createNewSuperhero(name, superpower, humilityScore)
+      logic.createNewSuperhero(name, superPower, humilityScore)
           .then(() => {
             setName('')
-            setSuperpower('')
+            setSuperPower('')
             setHumilityScore('')
-            listSuperheroes()
+            listSuperheros()
           })
           .catch(error => {
               console.error(error)
@@ -81,7 +62,7 @@ function App() {
       <form onSubmit={handleCreateNewSuperheroSubmit} className='bg-white shadow-md rounded-lg p-6 w-96 space-y-4'>
         <input 
           type='text' 
-          placeholder='Nombre' 
+          placeholder='Name' 
           value={name} 
           onChange={(e) => setName(e.target.value)} 
           required 
@@ -89,15 +70,15 @@ function App() {
         />
         <input 
           type='text' 
-          placeholder='Superpoder' 
-          value={superpower} 
-          onChange={(e) => setSuperpower(e.target.value)} 
+          placeholder='Super Power' 
+          value={superPower} 
+          onChange={(e) => setSuperPower(e.target.value)} 
           required 
           className='w-full p-2 border border-gray-300 rounded'
         />
         <input 
           type='number' 
-          placeholder='Humildad (1-10)' 
+          placeholder='Humility (1-10)' 
           value={humilityScore} 
           onChange={(e) => setHumilityScore(Number(e.target.value))} 
           required 
@@ -112,19 +93,18 @@ function App() {
       </form>
 
       <h2 className='text-2xl font-semibold text-gray-700 mt-8'>List of Superheros</h2>
-      {superheroes.length === 0 && <p className="text-gray-500">No hay superhéroes disponibles.</p>}
-      <ul className='w-96 mt-4'>
-        {superheroes.map((hero, index) => (
+      {(superheros.length === 0 
+      ? <p className="text-gray-500">No Superheros Available</p> 
+      : <ul className='w-96 mt-4'>
+        {superheros.map((hero, index) => (
           <li key={index} className='bg-white shadow-md p-4 mb-2 rounded-lg flex justify-between'>
             <span className='font-bold'>{hero.name}</span> 
             <span className='text-gray-600'>{hero.superPower} </span>
             <span className='text-blue-500 font-semibold'>Humility: {hero.humilityScore}</span>
           </li>
         ))}
-      </ul>
+      </ul>)}
     </div>
   )}
-
-
 
 export default App

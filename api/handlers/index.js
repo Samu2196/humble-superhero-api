@@ -1,4 +1,4 @@
-import listSuperheroesHandler from './listSuperheroesHandler.js'
+import listSuperherosHandler from './listSuperherosHandler.js'
 import createNewSuperheroHandler from './createNewSuperheroHandler.js'
 
-export { createNewSuperheroHandler, listSuperheroesHandler };
+export { createNewSuperheroHandler, listSuperherosHandler };

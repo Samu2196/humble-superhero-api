@@ -1,9 +1,9 @@
 import createNewSuperhero from './createNewSuperhero'
-import listSuperheroes from './listSuperheroes'
+import listSuperheros from './listSuperheros'
 
 const logic = { 
     createNewSuperhero,
-    listSuperheroes
+    listSuperheros
     }
 
 export default logic    

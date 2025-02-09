@@ -1,11 +1,11 @@
 import validate from '../common/validate.js'
 
-let superheroes = [
+let superheros = [
     { name: "Superman", superPower: "Flying", humilityScore: 10 }
 ]
 
-const listSuperheroes = () => {
-    return Promise.resolve(superheroes.sort((a, b) => b.humilityScore - a.humilityScore))
+const listSuperheros = () => {
+    return Promise.resolve(superheros.sort((a, b) => b.humilityScore - a.humilityScore))
 }
 
 
@@ -16,14 +16,14 @@ const createNewSuperhero = (name, superPower, humilityScore) => {
     validate.number1to10(humilityScore, 'humilityScore')
 
     const newHero = { name, superPower, humilityScore }
-    superheroes.push(newHero)
+    superheros.push(newHero)
     
-    return Promise.resolve(superheroes)
+    return Promise.resolve(superheros)
 }
 
 
 const logic = {
-    listSuperheroes,
+    listSuperheros,
     createNewSuperhero
 }
 

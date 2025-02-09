@@ -11,11 +11,9 @@ export default () => {
 
             return response.json()
                 .then(body => {
-                    const { error, message } = body
+                    const { message } = body
 
-                    const constructor = errors[error]
-
-                    throw new constructor(message)
+                    throw new Error(message)
                 })
         })
 }
