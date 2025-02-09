@@ -6,7 +6,7 @@ export default (name, superPower, humilityScore) => {
     validate.number(humilityScore, 'humilityScore')
     validate.number1to10(humilityScore, 'humilityScore')
 
-    return fetch('http://localhost:5000/superheroes', {
+    return fetch('http://localhost:5000/superheros', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

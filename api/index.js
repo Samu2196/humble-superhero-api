@@ -11,9 +11,9 @@ api.use(cors())
 api.use(express.json())
 
 // Endpoint to add a new superhero
-api.post('/superheroes', createNewSuperheroHandler)
+api.post('/superheros', createNewSuperheroHandler)
 
 // Endpoint para obtener la lista de superhéroes ordenados por humildad
-api.get('/superheroes', listSuperheroesHandler)
+api.get('/superheros', listSuperheroesHandler)
 
 api.listen(PORT, () => console.log(`API listening on http://localhost:${PORT}`))

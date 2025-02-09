@@ -1,5 +1,5 @@
 export default () => {
-    return fetch('http://localhost:5000/superheroes', {
+    return fetch('http://localhost:5000/superheros', {
     })
         .catch(error => { throw new Error(error.message) })
         .then(response => {
