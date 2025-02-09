@@ -62,7 +62,6 @@ function App() {
 }
 
   return (
-    
     <Container>
       <Heading level='1' className='text-3xl font-bold text-gray-800 mb-6'>Humble Superhero API</Heading>
       <Form onSubmit={handleCreateNewSuperheroSubmit}>
